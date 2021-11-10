@@ -10,6 +10,8 @@ const firebaseConfig = {
 
   authDomain: "fir-auth-a3a71.firebaseapp.com",
 
+  databaseURL: "https://fir-auth-a3a71-default-rtdb.firebaseio.com",
+
   projectId: "fir-auth-a3a71",
 
   storageBucket: "fir-auth-a3a71.appspot.com",
@@ -22,14 +24,18 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-let app;
+/*let app;
 if (firebase.apps.length === 0) {
   console.info({ firebase });
   app = firebase.initializeApp(firebaseConfig);
 } else {
   app = firebase.app();
-}
+}*/
+
+firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+//const storage = firebase.storage();
+const database = firebase.database();
 
-export { auth };
+export { auth, database, firebase };

@@ -18,7 +18,7 @@ export default function App() {
         <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Home">
+        <Stack.Screen name="Home" options={{ headerShown: false }}>
           {(props) => <Home {...props} />}
         </Stack.Screen>
       </Stack.Navigator>

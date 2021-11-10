@@ -70,6 +70,8 @@ const LoginPage = () => {
         // then is a fullfilled promise
         const user = userCredentials.user;
         console.log(user.email);
+        console.log("UID");
+        console.log(user.uid);
       })
       .catch((error) => {
         // catch is a rejected promise
@@ -83,6 +85,8 @@ const LoginPage = () => {
         // then is a fullfilled promise
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
+        console.log("Logged UID:");
+        console.log(user.uid);
       })
       .catch((error) => {
         // catch is a rejected promise

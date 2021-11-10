@@ -1,15 +1,26 @@
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import ToDoScreen from "../../screens/ToDo";
+import UserScreen from "../../screens/User";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const Tab = createBottomTabNavigator();
+
 // auth is an instance of firebase.auth() and it is imported from the firebase.js file
 import { auth } from "../../firebase";
 const HomePage = () => {
   // navigation is an instance of our current NavigationContainer and we access to it trough the useNavigation() custom hook
   const navigation = useNavigation();
-
+  
+  /*const [user, setUserId] = useState();
+  setUserId(auth.currentUser?.email);*/
+  
   // We will make a simple call to auth.signOut() which is also a promise based function and if it fullfills
   // we redirect the user to Login
-  const handleSignOut = () => {
+  /*const handleSignOut = () => {
     auth
       .signOut()
       .then(() => {
@@ -18,16 +29,39 @@ const HomePage = () => {
       .catch((error) => {
         alert(error.message);
       });
-  };
+  };*/
+
   return (
-    <View style={styles.container}>
-      {/* Simple text with the current user */}
+    //Vista elemento padre
+    <Tab.Navigator 
+      screenOptions={({route})=>({
+        tabBarIcon:({focused, color, size})=> {
+          let iconName;
+
+          if(route.name === "ToDoScreen") {
+            iconName = focused 
+            ? "ios-list"
+            : "ios-list-outline"
+          }else if(route.name === "UserScreen"){
+            iconName = focused 
+            ? "images"
+            : "images-outline"
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarInactiveTintColor: "tomato",
+        tabBarActiveTintColor: "grey"
+      })}>
+        <Tab.Screen name="ToDoScreen" children={()=> <ToDoScreen />} />
+        <Tab.Screen name="UserScreen" children={()=> <UserScreen />} />
+
+      </Tab.Navigator>
+    /*<View style={styles.container}>
       <Text>Email:{auth.currentUser?.email}</Text>
-      {/* Simple button that calls our function */}
       <TouchableOpacity style={styles.button} onPress={handleSignOut}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
-    </View>
+    </View>*/
   );
 };
 export default HomePage;
