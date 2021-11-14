@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    // Navigator container will contain all navigation flow of our app
+    // Navigator container will contain all navigation flow of our app.
     <NavigationContainer>
       {/* We set the navigator as a Stack navigator, this one will allow us to handle navigation with a stack instead of tabs */}
       <Stack.Navigator>
