@@ -1,21 +1,17 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import {
-  Image,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
+
 // auth is an instance of firebase.auth() and it is imported from the firebase.js file
 import { auth } from "../../firebase";
 import logo from "../../media/images/utags.png";
+import SingUpScreen from "../SignUp";
+
 const LoginPage = () => {
   // Our app will contain 2 states, the email and password with an empty string as initial value
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
+  const [registroVisible, setRegistroVisible] = useState(false);
 
   // navigation is an instance of our current NavigationContainer and we access to it trough the useNavigation() custom hook
   const navigation = useNavigation();
@@ -94,12 +90,17 @@ const LoginPage = () => {
       });
   };
 
+  const nuevoUsuario = () => {
+    setRegistroVisible(true);
+  }
+
   return (
-    // KeyboardAvoidingView is a type of view that will push the content up when a keyboard shows
+    registroVisible ? (
+      <SingUpScreen setRegistroVisible= {setRegistroVisible} />
+    ) : (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <Image source={logo} style={styles.logo} />
-        {/* We have 2 text inputs that will set the state our our constants (email, pdw) */}
         <TextInput
           placeholder="Email"
           value={email}
@@ -114,19 +115,18 @@ const LoginPage = () => {
           secureTextEntry
         />
       </View>
-      {/* We have 2 buttons that will execute the functions above) */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignup}
+          onPress={nuevoUsuario}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Sign Up</Text>
+          <Text style={styles.buttonOutlineText}>Nuevo Usuario</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView>)
   );
 };
 export default LoginPage;
