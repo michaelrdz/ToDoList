@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {StyleSheet, Text, TouchableOpacity, View, TextInput, Image, ScrollView, } from "react-native";
 import { StyledView, StyledTextoLista, StyledInput } from "../../styles/StyledComp";
 import { auth, database } from "../../firebase";
-//import ShowToDoScreen from "../ShowToDo";
+import { estilosLista as styles } from "../../styles/estilosLista";
 import Icon from 'react-native-vector-icons/Ionicons';
   
 const ToDoScreen = ({}) => {
@@ -68,11 +68,7 @@ const ToDoScreen = ({}) => {
   return (
     <View style={styles.container}>
     <View
-      style={{
-        flexDirection: "row",
-        backgroundColor: "gray",
-        height: 100,
-      }}
+      style={styles.cabecera}
     >
       <View
         style={{
@@ -81,7 +77,7 @@ const ToDoScreen = ({}) => {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 20, color: "white" }}>Título:</Text>
+        <Text style={{ fontSize: 20, color: "white" }}>Tarea:</Text>
       </View>
 
       <View
@@ -91,7 +87,7 @@ const ToDoScreen = ({}) => {
         }}
       >
         <StyledInput
-          placeholder="Ingresar un título"
+          placeholder="Ingresar tarea nueva"
           onChangeText={(text) => setTitulo(text)}
           value={titulo}
         />
@@ -117,23 +113,11 @@ const ToDoScreen = ({}) => {
     </View>
     <StyledView special1>
       <ScrollView>
-      {listar.length === 0 ? (<Text>No hay tareas pendientes</Text>) : 
+      {listar.length === 0 ? (<Text style={styles.textoListaVacia}>No hay tareas pendientes</Text>) : 
       (
         listar?.map((item) => (
-          /*<ListarCuadro
-            titulo={cuadro.Titulo}
-            estado={cuadro.Estado}
-            eliminar={() => props.eliminarID(cuadro.id)}
-          />*/
           <View key={item.id}
-                style={{
-                flexDirection: "row",
-                flex: 1,
-                backgroundColor: "#c7cac8",
-                borderColor: "white",
-                borderBottomWidth: 2,
-                marginTop: 10,
-                }}
+                style={styles.filaLista}
             >
                 <View
                 style={{
@@ -177,7 +161,7 @@ const ToDoScreen = ({}) => {
                     alignItems: "center",
                 }}
                 >
-                <Icon name="trash-2" size={40} color="red" onPress={()=>eliminarItem(item.id)} />
+                <Icon name="trash-outline" size={34} color="red" onPress={()=>eliminarItem(item.id)} />
                 </View>
             </View>
         )))}
@@ -187,12 +171,3 @@ const ToDoScreen = ({}) => {
   );
 };
 export default ToDoScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

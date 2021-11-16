@@ -44,12 +44,12 @@ const HomePage = () => {
             : "ios-list-outline"
           }else if(route.name === "UserScreen"){
             iconName = focused 
-            ? "images"
-            : "images-outline"
+            ? "person-circle"
+            : "person-circle-outline"
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarInactiveTintColor: "tomato",
+        tabBarInactiveTintColor: "#f18698",
         tabBarActiveTintColor: "grey"
       })}>
         <Tab.Screen name="ToDoScreen" children={()=> <ToDoScreen />} />
