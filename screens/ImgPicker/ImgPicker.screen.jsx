@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useNavigation } from "@react-navigation/core";
-//import { INFO_PAGE_STYLES as styles } from "./Info.styles";
-//import { TEXT_STYLES as textStyles } from "../../styles/text.styles";
-import usrPic from "../../media/images/usr_profpic.png";
+/*import { useNavigation } from "@react-navigation/core";*/
+import { estilosPicker as styles } from "../../styles/estilosPicker";
 
 import { auth, firebase } from "../../firebase";
 import 'firebase/storage';
 
-const ImgPickerScreen = ({setPickerVisible, setPickedImagePath}) => {
+const ImgPickerScreen = ({setPickerVisible, setPickedImagePath, pickedImagePath}) => {
 
   // This function is triggered when the "Select an image" button pressed
   const showImagePicker = async () => {
@@ -96,69 +94,48 @@ const ImgPickerScreen = ({setPickerVisible, setPickedImagePath}) => {
         });
   }
 
+  const volver = ()=> {
+    setPickerVisible(false);
+  }
+
     return (
         // Vista Image Picker
         <View style={styles.screen}>
-          
-          <View style={styles.buttonContainer}>
-            <Button onPress={showImagePicker} title="Select an image" />
-            <Button onPress={openCamera} title="Open camera" />
-          </View>
-    
-          {/*<View style={styles.imageContainer}>
+          <View style={styles.imageContainer}>
             {
               pickedImagePath !== '' && <Image
                 source={{ uri: pickedImagePath }}
                 style={styles.image}
               />
             }
-          </View>*/}
+          </View>
+          {/*<View style={styles.buttonContainer}>*/}
+          <View>
+          <TouchableOpacity
+            onPress={showImagePicker}
+            style={[styles.button]}
+          >
+            <Text style={styles.buttonText}>Abrír Galería</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={openCamera}
+            style={[styles.button]}
+          >
+            <Text style={styles.buttonText}>Abrír Cámara</Text>
+          </TouchableOpacity>
+            {/*<Button style={styles.button} onPress={showImagePicker} title="Abrír Galería" />*/}
+            {/*<Button onPress={openCamera} title="Abrir Cámara" />*/}
+          </View>
+          <View>
+          <TouchableOpacity
+            onPress={volver}
+            style={[styles.button, styles.buttonOutline]}
+          >
+            <Text style={styles.buttonOutlineText}>Cancelar</Text>
+          </TouchableOpacity>
+          </View>
         </View>
       );
 };
 
 export default ImgPickerScreen;
-
-const styles = StyleSheet.create({
-    screen: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    buttonContainer: {
-      width: 400,
-      flexDirection: 'row',
-      justifyContent: 'space-around'
-    },
-    imageContainer: {
-      padding: 30
-    },
-    image: {
-      width: 400,
-      height: 300,
-      resizeMode: 'cover'
-    },
-    button: {
-      backgroundColor: "#0782F9",
-      width: "60%",
-      padding: 15,
-      borderRadius: 10,
-      alignItems: "center",
-      marginTop: 40,
-    },
-    buttonText: {
-      color: "white",
-      fontWeight: "700",
-      fontSize: 16,
-    },
-    buttonOutlineText: {
-      color: "#0782F9",
-      fontWeight: "700",
-      fontSize: 16,
-    },
-    usrPic: {
-      width: 100,
-      height: 100,
-      resizeMode: 'cover'
-    }
-  });
