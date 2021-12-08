@@ -6,20 +6,19 @@ import * as firebase from "firebase";
 // Your web app's Firebase configuration, you have to paste here the object that comes from firebase
 const firebaseConfig = {
 
-  apiKey: "AIzaSyA3jcuUPHIG06DxPOobq-Jo_eflCEjy-E0",
+  apiKey: "AIzaSyCfSXSAT1UEFTIpq1ST5iI6bk8YtAMQl5o",
 
-  authDomain: "fir-auth-a3a71.firebaseapp.com",
+  authDomain: "todolist-312f8.firebaseapp.com",
 
-  databaseURL: "https://fir-auth-a3a71-default-rtdb.firebaseio.com",
+  databaseURL: "https://todolist-312f8-default-rtdb.firebaseio.com",
 
-  projectId: "fir-auth-a3a71",
+  projectId: "todolist-312f8",
 
-  storageBucket: "fir-auth-a3a71.appspot.com",
+  storageBucket: "todolist-312f8.appspot.com",
 
-  messagingSenderId: "466562936098",
+  messagingSenderId: "1074818563677",
 
-  appId: "1:466562936098:web:be9520fa1294cc26a3097b"
-
+  appId: "1:1074818563677:web:0a9e6e9f425c68401117b4"
 
 };
 
